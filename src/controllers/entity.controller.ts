@@ -7,25 +7,25 @@ import {
 import { EntityService } from '../services';
 
 class EntityController {
-  static async readEntitiesHandler(
+  static async getEntitiesHandler(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const response = await EntityService.readEntities(req);
+      const response = await EntityService.getEntities(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);
     }
   }
-  static async readEntityHandler(
+  static async getEntityHandler(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const response = await EntityService.readEntity(req);
+      const response = await EntityService.getEntity(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);
@@ -43,13 +43,13 @@ class EntityController {
       next(error);
     }
   }
-  static async readSubEnityHandler(
+  static async getSubEnityHandler(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const response = await EntityService.readSubEnity(req);
+      const response = await EntityService.getSubEnity(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);

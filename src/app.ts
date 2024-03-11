@@ -4,6 +4,7 @@ import { createServer } from 'http';
 import { appConfig } from './config';
 import { initDb } from './repository';
 import { V1Routes } from './routes/v1';
+import { initAjv } from './schemas';
 
 const app = express();
 
@@ -21,6 +22,8 @@ initDb(connectionUrl, async (error: Error) => {
     process.exit(1);
   }
   console.log("NodeJS Api Connected to MongoDB.");
+
+  await initAjv();
 
   httpServer.listen(appConfig.app.port, () => {
     console.log("server is running in port 3002");

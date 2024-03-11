@@ -38,3 +38,4 @@ function getDb() {
 
 export { getDb, initDb };
 export * from "./user.repository";
+export * from "./entity.repository";

@@ -1,5 +1,7 @@
-import i18next from 'i18next';
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
+import { stripHtml } from "string-strip-html";
+
+import i18next from "./i18next";
 
 class Common {
   static mongoSanitize = (param: any) => {
@@ -18,8 +20,11 @@ class Common {
   static newId = () => {
     return new ObjectId();
   };
-  static translate = (key: string, lang = "en", options: any) => {
+  static translate = (key: string, lang = "en", options?: any) => {
     return i18next.t(key, { lng: lang, ...options });
   };
+  static sanitize(string = "") {
+    return stripHtml(string).result;
+  }
 }
 export { Common };

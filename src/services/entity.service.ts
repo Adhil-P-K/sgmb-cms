@@ -1,7 +1,7 @@
-import { Request } from 'express';
+import { Request } from "express";
 
-import { EntityRepository } from '../repository';
-import { Common } from '../utils';
+import { EntityRepository, UserRepository } from "../repository";
+import { Common } from "../utils";
 
 class EntityService {
   static async getEntities(req: Request) {
@@ -41,13 +41,106 @@ class EntityService {
     }
   }
   static async getEntity(req: Request) {
+    const { query, params } = req;
     try {
+      const payload = {
+        entityId: params.entityId,
+      };
+      const entityDoc = await EntityRepository.readEntity(
+        Common.getId(payload.entityId)
+      );
+      const entityUsers = await UserRepository.readUsers({
+        entityId: Common.getId(payload.entityId),
+      });
+
+      return {
+        message: Common.translate(
+          "entityretrivedsuccess",
+          query?.lang as string
+        ),
+        data: { entity: entityDoc, Users: entityUsers },
+      };
     } catch (error) {
       throw error;
     }
   }
   static async updateEnity(req: Request) {
+    const { body, params, query } = req;
     try {
+      const entityId = params.entityId;
+      const payload = {
+        name: body.name,
+        name_ar: body.name_ar,
+        email: body.email,
+        domain: body.email.split("@")[1],
+        countryCode: parseInt(body.countryCode),
+        phoneNumber: parseInt(body.phoneNumber),
+      };
+      // const schemaResult = schema.validateJson("EntityUpdateReq", payload);
+      // if (!schemaResult.result) {
+      //   throw new CustomError(
+      //     400,
+      //     Common.translate("schemaerror", query?.lang as string),
+      //     schemaResult.errors
+      //   );
+      // }
+      // if (!file) {
+      //   throw new CustomError(
+      //     400,
+      //     Common.translate("entitylogomissing", query?.lang as string)
+      //   );
+      // }
+      // const existingEntityDoc = await EntityRepository.readEntity({
+      //   domain: Common.mongoSanitize(payload.domain),
+      // });
+      // if (existingEntityDoc && existingEntityDoc._id != entityId) {
+      //   if (existingEntityDoc.status === EntityStatus.APPROVED) {
+      //     throw new CustomError(
+      //       409,
+      //       Common.translate("entityalreadyregistered", query?.lang as string)
+      //     );
+      //   }
+      //   if (existingEntityDoc.status === EntityStatus.PENDING) {
+      //     throw new CustomError(
+      //       409,
+      //       Common.translate("entitywaitingapproval", query?.lang as string)
+      //     );
+      //   }
+      //   if (existingEntityDoc.status === EntityStatus.REJECTED) {
+      //     throw new CustomError(
+      //       409,
+      //       Common.translate("entityalreadyrejected", query?.lang as string)
+      //     );
+      //   }
+      // }
+      // const entityDoc = await EntityRepository.updateEntity(
+      //   { _id: Common.getId(entityId) },
+      //   {
+      //     $set: {
+      //       name: Common.sanitize(payload.name),
+      //       email: Common.sanitize(payload.email),
+      //       domain: Common.sanitize(payload.domain),
+      //       countryCode: payload.countryCode,
+      //       phoneNumber: payload.phoneNumber,
+      //       logo: {
+      //         src: file.path,
+      //         fileName: file.originalname,
+      //         mimeType: file.mimetype,
+      //       },
+      //       t: {
+      //         ar: {
+      //           name: Common.sanitize(payload.name_ar),
+      //         },
+      //       },
+      //       updatedAt: new Date(),
+      //     },
+      //   },
+      //   { returnDocument: "after" }
+      // );
+      return {
+        message: Common.translate("entityupdatesuccess", query?.lang as string),
+        data: "ij",
+      };
     } catch (error) {
       throw error;
     }

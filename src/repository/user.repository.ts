@@ -1,10 +1,27 @@
-import { getDb } from './';
+import { getDb } from "./";
 
 class UserRepository {
-  static async ReadUser(query: object) {
+  static async readUser(query: object) {
     const db = getDb();
     try {
       return await db.users.findOne(query);
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async readUsers(query: object, skips = 0, limit = 10) {
+    const db = getDb();
+    try {
+      return await db.users
+        .find(query)
+        .sort({ createdAt: -1 })
+        .skip(skips)
+        .limit(limit)
+        .project({
+          passwordSalt: 0,
+          passwordHash: 0,
+        })
+        .toArray();
     } catch (error) {
       throw error;
     }

@@ -1,10 +1,10 @@
-import express from 'express';
-import { createServer } from 'http';
+import express from "express";
+import { createServer } from "http";
 
-import { appConfig } from './config';
-import { initDb } from './repository';
-import { V1Routes } from './routes/v1';
-import { initAjv } from './schemas';
+import { appConfig } from "./config";
+import { initDb } from "./repository";
+import { V1Routes } from "./routes/v1";
+import { initAjv } from "./schemas";
 
 const app = express();
 
@@ -17,6 +17,8 @@ app.use("/api/v1", V1Routes);
 
 const connectionUrl: string = `mongodb://${appConfig.db.user}:${appConfig.db.password}@${appConfig.db.host}:${appConfig.db.port}/${appConfig.db.database}`;
 initDb(connectionUrl, async (error: Error) => {
+  console.log(connectionUrl);
+
   if (error) {
     console.log(`Error Connecting to MongoDB: ${error}`);
     process.exit(1);

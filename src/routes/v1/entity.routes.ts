@@ -1,13 +1,13 @@
-import express from 'express';
+import express from "express";
 
-import { EntityController } from '../../controllers';
+import { EntityController } from "../../controllers";
 
 const router = express.Router();
 // entities Api
 
-router.get("/entities", EntityController.getEntitiesHandler);
-router.get("/entities/entityId", EntityController.getEntityHandler);
-router.patch("/entities/entityId", EntityController.updateEnityHandler);
+router.get("/", EntityController.getEntitiesHandler);
+router.get("/:entityId", EntityController.getEntityHandler);
+router.patch("/:entityId", EntityController.updateEnityHandler);
 // SubEntity Api
 
 router.get(

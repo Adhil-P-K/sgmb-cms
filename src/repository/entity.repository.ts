@@ -1,7 +1,7 @@
-import { getDb } from './';
+import { getDb } from "./";
 
 class EntityRepository {
-  static async readEntity(query: string) {
+  static async readEntity(query: any) {
     const db = getDb();
     try {
       return await db.entities.findOne(query);

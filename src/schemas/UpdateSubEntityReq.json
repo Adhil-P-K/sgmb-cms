@@ -1,0 +1,21 @@
+{
+  "$id": "UpdateSubEntityReq",
+  "type": "object",
+  "properties": {
+    "subEntityId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "The 'requestId' field must be a valid MongoDB ObjectID."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "errorMessage": "Invalid email address format. Please provide a valid email address."
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "additionalProperties": false,
+  "errorMessage": "Request malformed."
+}

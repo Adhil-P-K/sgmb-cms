@@ -1,0 +1,28 @@
+{
+  "workbench.colorTheme": "Default Dark Modern",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.tabWidth": 2,
+  "prettier.printWidth": 120,
+  "prettier.trailingComma": "all",
+  "prettier.singleQuote": true,
+  "files.eol": "\r\n",
+  "files.associations": {
+    "*.ejs": "html",
+    "*.ts": "typescript"
+  },
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.format.templating": true,
+  "html.validate.scripts": false
+}

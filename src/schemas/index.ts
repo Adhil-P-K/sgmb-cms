@@ -3,6 +3,7 @@ import ajvErrors from 'ajv-errors';
 import ajvFormats from 'ajv-formats';
 import fs from 'fs';
 import { glob } from 'glob';
+import { ObjectId } from 'mongodb';
 
 const ajv = new Ajv({ allErrors: true });
 
@@ -10,16 +11,22 @@ ajvFormats(ajv);
 ajvErrors(ajv);
 
 ajv.addKeyword({
-  keyword: "isNotEmpty",
+  keyword: 'isNotEmpty',
   validate: function (data: string) {
-    return typeof data === "string" && data.trim() !== "";
+    return typeof data === 'string' && data.trim() !== '';
   },
   errors: true,
 });
+ajv.addFormat('objectid', {
+  type: 'string',
+  validate: (objId) => {
+    return ObjectId.isValid(objId);
+  },
+});
 const initAjv = async () => {
-  const schemaFiles = await glob("./src/schemas/*.json");
+  const schemaFiles = await glob('./src/schemas/*.json');
   for (const filePath of schemaFiles) {
-    const schema = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const schema = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     ajv.addSchema(schema);
   }
 };

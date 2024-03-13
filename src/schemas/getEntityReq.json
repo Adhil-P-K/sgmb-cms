@@ -1,0 +1,13 @@
+{
+  "$id": "getEntityReq",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "entityId must be a valid MongoDB ObjectId."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

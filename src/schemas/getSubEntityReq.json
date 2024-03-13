@@ -1,0 +1,13 @@
+{
+  "$id": "getSubEntityReq",
+  "type": "object",
+  "properties": {
+    "subEntityId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "entityId must be a valid MongoDB ObjectId."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

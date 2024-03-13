@@ -1,0 +1,51 @@
+{
+  "$id": "EntityUpdateReq",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "entityId must be a valid MongoDB ObjectId."
+    },
+    "name": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Entity name is required and cannot be empty."
+    },
+    "name_ar": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Entity arabic name is required and cannot be empty."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "errorMessage": "Invalid email address format. Please provide a valid email address."
+    },
+    "domain": {
+      "type": "string",
+      "format": "hostname",
+      "errorMessage": "Invalid host address format. Please provide a valid email address."
+    },
+    "countryCode": {
+      "type": "number",
+      "exactIntDigit": 3,
+      "errorMessage": "Entity country code is required and cannot be empty."
+    },
+    "phoneNumber": {
+      "type": "number",
+      "exactIntDigit": 9,
+      "errorMessage": "Entity phone number is required and cannot be empty."
+    }
+  },
+  "required": [
+    "name",
+    "name_ar",
+    "email",
+    "domain",
+    "countryCode",
+    "phoneNumber"
+  ],
+  "additionalProperties": false,
+  "errorMessage": "Request malformed."
+}

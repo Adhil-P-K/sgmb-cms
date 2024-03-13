@@ -26,5 +26,13 @@ class UserRepository {
       throw error;
     }
   }
+  static async updateUser(query: object, payload: object, options?: object) {
+    const db = getDb();
+    try {
+      return await db.users.findOneAndUpdate(query, payload, options);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 export { UserRepository };

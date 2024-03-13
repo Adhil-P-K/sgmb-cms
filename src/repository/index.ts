@@ -12,18 +12,18 @@ async function initDb(connectionUrl: string, callback: any) {
 
     const db: any = client.db(appConfig.db.database);
 
-    db.users = db.collection("users");
-    db.events = db.collection("events");
-    db.services = db.collection("services");
-    db.entities = db.collection("entities");
-    db.departments = db.collection("departments");
-    db.notifications = db.collection("notifications");
-    db.Notifications = db.collection("c_notifications");
-    db.passwordResetTokens = db.collection("password-reset-tokens");
-    db.calendarRequests = db.collection("calendar-requests");
-    db.eventVenues = db.collection("event-venues");
-    db.eventCategories = db.collection("event-categories");
-    db.syslogs = db.collection("syslogs");
+    db.users = db.collection('users');
+    db.events = db.collection('events');
+    db.services = db.collection('services');
+    db.entities = db.collection('entities');
+    db.departments = db.collection('departments');
+    db.notifications = db.collection('notifications');
+    db.Notifications = db.collection('c_notifications');
+    db.passwordResetTokens = db.collection('password-reset-tokens');
+    db.calendarRequests = db.collection('calendar-requests');
+    db.eventVenues = db.collection('event-venues');
+    db.eventCategories = db.collection('event-categories');
+    db.syslogs = db.collection('syslogs');
 
     dbInstance = db;
 
@@ -37,5 +37,6 @@ function getDb() {
 }
 
 export { getDb, initDb };
-export * from "./user.repository";
-export * from "./entity.repository";
+export * from './user.repository';
+export * from './entity.repository';
+export * from './department.repository';

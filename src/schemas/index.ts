@@ -23,6 +23,16 @@ ajv.addFormat('objectid', {
     return ObjectId.isValid(objId);
   },
 });
+ajv.addKeyword({
+  keyword: 'exactIntDigit',
+  validate: function (length: number, data: string) {
+    const exactDigits = length;
+    const numString = parseInt(data).toString();
+    const digitCount = numString.length;
+    return digitCount === exactDigits;
+  },
+  errors: true,
+});
 const initAjv = async () => {
   const schemaFiles = await glob('./src/schemas/*.json');
   for (const filePath of schemaFiles) {

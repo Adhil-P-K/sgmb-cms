@@ -1,0 +1,34 @@
+{
+  "$id": "UpdateDepartmentReq",
+  "type": "object",
+  "properties": {
+    "departmentId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "The 'departmentId' field must be a valid MongoDB ObjectID."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "errorMessage": "Invalid email address format. Please provide a valid email address."
+    },
+    "countryCode": {
+      "type": "number",
+      "exactIntDigit": 3,
+      "errorMessage": "Department country code is required and cannot be empty."
+    },
+    "phoneNumber": {
+      "type": "number",
+      "exactIntDigit": 9,
+      "errorMessage": "Department phone number is required and cannot be empty."
+    }
+  },
+  "required": [
+    "departmentId",
+    "email",
+    "countryCode",
+    "phoneNumber"
+  ],
+  "additionalProperties": false,
+  "errorMessage": "Request malformed."
+}

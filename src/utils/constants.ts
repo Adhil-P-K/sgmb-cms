@@ -1,6 +1,10 @@
 const EntityStatus = {
-  PENDING: "pending",
-  APPROVED: "approved",
-  REJECTED: "rejected",
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
 };
-export { EntityStatus };
+const UserRole = {
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+};
+export { EntityStatus, UserRole };

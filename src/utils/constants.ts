@@ -7,4 +7,9 @@ const UserRole = {
   ADMIN: 'ADMIN',
   USER: 'USER',
 };
-export { EntityStatus, UserRole };
+const UserLevel = {
+  ENTITY: 'ENTITY',
+  INTERNAL_DEPARTMENT: 'INTERNAL_DEPARTMENT',
+  HIGHER_MANAGEMENT: 'HIGHER_MANAGEMENT',
+};
+export { EntityStatus, UserLevel, UserRole };

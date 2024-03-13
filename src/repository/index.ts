@@ -40,3 +40,4 @@ export { getDb, initDb };
 export * from './user.repository';
 export * from './entity.repository';
 export * from './department.repository';
+export * from './highermanagement.repository';

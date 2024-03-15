@@ -1,7 +1,8 @@
-import { getDb } from "./";
+import { User } from '../models';
+import { getDb } from './';
 
 class UserRepository {
-  static async readUser(query: object) {
+  static async readUser(query: object): Promise<User | null> {
     const db = getDb();
     try {
       return await db.users.findOne(query);

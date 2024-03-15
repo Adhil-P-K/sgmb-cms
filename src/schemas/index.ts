@@ -12,7 +12,7 @@ ajvErrors(ajv);
 
 ajv.addKeyword({
   keyword: 'isNotEmpty',
-  validate: function (data: string) {
+  validate: function (val: boolean, data: string) {
     return typeof data === 'string' && data.trim() !== '';
   },
   errors: true,

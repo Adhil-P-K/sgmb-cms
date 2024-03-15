@@ -1,12 +1,14 @@
 import dotenv from 'dotenv';
 
+import { AppConfig } from '../models';
+
 // if (process.env.NODE_ENV !== "prod") {
 //   dotenv.config({ path: `./.env.${process.env.NODE_ENV}` });
 // } else {
 //   dotenv.config();
 // }
 dotenv.config();
-const appConfig = {
+const appConfig: AppConfig = {
   uiBase: process.env.UI_BASE,
   higherManagementEmail: process.env.HIGHER_MANAGEMENT_EMAIL,
   totalAllowedEntityUsers: 2,
@@ -37,13 +39,10 @@ const appConfig = {
     secret: process.env.RECAPTCHA_SECRET_KEY,
   },
 
-  isloginVerificationEnabled:
-    process.env.IS_LOGIN_VERIFICATION_ENABLED === "true" ? true : false,
+  isloginVerificationEnabled: process.env.IS_LOGIN_VERIFICATION_ENABLED === 'true' ? true : false,
 
-  loginVerificationOTPExpirationDuration:
-    process.env.LOGIN_VERIFICATION_OTP_EXPIRATION_DURATION,
-  passwordRecoveryTokenExpirationDuration:
-    process.env.PASSWORD_RECOVERY_TOKEN_EXPIRATION_DURATION,
+  loginVerificationOTPExpirationDuration: process.env.LOGIN_VERIFICATION_OTP_EXPIRATION_DURATION,
+  passwordRecoveryTokenExpirationDuration: process.env.PASSWORD_RECOVERY_TOKEN_EXPIRATION_DURATION,
 };
 
 export { appConfig };

@@ -1,23 +1,10 @@
-import {
-  Request,
-  Response,
-} from 'express';
+import { Request, Response } from 'express';
 import { NextFunction } from 'express-serve-static-core';
 
-import {
-  fileUpload,
-  isValidFile,
-} from '../middlewares';
-import {
-  EntityRepository,
-  UserRepository,
-} from '../repository';
+import { fileUpload, isValidFile } from '../middlewares';
+import { EntityRepository, UserRepository } from '../repository';
 import { validateJson } from '../schemas';
-import {
-  Common,
-  CustomError,
-  EntityStatus,
-} from '../utils';
+import { Common, CustomError, EntityStatus } from '../utils';
 
 class EntityService {
   static async uploadEntityLogoHandler(req: Request, res: Response, next: NextFunction) {

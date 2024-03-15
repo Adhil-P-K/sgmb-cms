@@ -1,0 +1,18 @@
+{
+  "$id": "LoginReq",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "errorMessage": "Invalid email address format. Please provide a valid email address."
+    },
+    "password": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Password is required and cannot be empty."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

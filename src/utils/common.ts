@@ -1,7 +1,10 @@
+import bcrypt from 'bcryptjs';
 import fs from 'fs';
+import * as jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 import { stripHtml } from 'string-strip-html';
 
+import { appConfig } from '../config';
 import i18next from './i18next';
 
 class Common {
@@ -37,6 +40,20 @@ class Common {
         }
       });
     }
+  };
+  static generateHash = (text: string, salt: string) => {
+    return bcrypt.hashSync(text, salt);
+  };
+
+  static generateAuthToken = (payload: object) => {
+    const tokenCode = appConfig.jwt.authTokenSecret || '';
+    return jwt.sign(payload, tokenCode, {
+      expiresIn: appConfig.jwt.authTokenLife,
+    });
+  };
+  static decodeAuthToken = (authToken: string) => {
+    const tokenCode = appConfig.jwt.authTokenSecret || '';
+    return jwt.verify(authToken, tokenCode);
   };
 }
 export { Common };

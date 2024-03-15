@@ -12,4 +12,9 @@ const UserLevel = {
   INTERNAL_DEPARTMENT: 'INTERNAL_DEPARTMENT',
   HIGHER_MANAGEMENT: 'HIGHER_MANAGEMENT',
 };
-export { EntityStatus, UserLevel, UserRole };
+const UserStatus = {
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
+};
+export { EntityStatus, UserLevel, UserRole, UserStatus };

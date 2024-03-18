@@ -24,6 +24,7 @@ async function initDb(connectionUrl: string, callback: any) {
     db.eventVenues = db.collection('event-venues');
     db.eventCategories = db.collection('event-categories');
     db.syslogs = db.collection('syslogs');
+    db.contents = db.collection('contents');
 
     dbInstance = db;
 
@@ -40,4 +41,4 @@ export { getDb, initDb };
 export * from './user.repository';
 export * from './entity.repository';
 export * from './department.repository';
-export * from './highermanagement.repository';
+export * from './higher.management.repository';

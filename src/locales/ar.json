@@ -137,6 +137,7 @@
     "sntitle5": "طلب تقويم - طُلب تعديل",
     "sntext5": "تم طلب تعديل طلب تقويمك \"{{calandarRequest.name}}\" من قبل المسؤول.",
     "sntitle6": "تم تحرير طلب التقويم بواسطة المسؤول",
-    "sntext6": "تم تحرير طلب تقويمك \"{{calandarRequest.name}}\" بواسطة المسؤول."
+    "sntext6": "تم تحرير طلب تقويمك \"{{calandarRequest.name}}\" بواسطة المسؤول.",
+    "contentVariableNotfornd": "contentVariableNotfornd"
   }
 }

@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import * as jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
+import slugify from 'slugify';
 import { stripHtml } from 'string-strip-html';
 
 import { appConfig } from '../config';
@@ -17,6 +18,15 @@ class Common {
       }
     }
     return param;
+  };
+  static generateSlug = (string: string) => {
+    return slugify(string, {
+      replacement: '-',
+      remove: undefined,
+      lower: true,
+      strict: false,
+      trim: true,
+    });
   };
   static getId = (id: string) => {
     return new ObjectId(id);

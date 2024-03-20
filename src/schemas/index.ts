@@ -23,6 +23,13 @@ ajv.addFormat('objectid', {
     return ObjectId.isValid(objId);
   },
 });
+ajv.addFormat('variable', {
+  type: 'string',
+  validate: (data) => {
+    const regex = /^\{\{[^{}]+\}\}$/;
+    return regex.test(data);
+  },
+});
 ajv.addKeyword({
   keyword: 'exactIntDigit',
   validate: function (length: number, data: string) {

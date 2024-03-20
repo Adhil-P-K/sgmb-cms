@@ -1,6 +1,14 @@
 import { getDb } from './';
 
 class ContentRepository {
+  static async createContent(payload: object) {
+    const db = getDb();
+    try {
+      return await db.contents.insertOne(payload);
+    } catch (error) {
+      throw error;
+    }
+  }
   static async readContent(query: any) {
     const db = getDb();
     try {
@@ -12,7 +20,7 @@ class ContentRepository {
   static async readContents(query: object, skips = 0, limit = 10) {
     const db = getDb();
     try {
-      return await db.contentss.find(query).sort({ createdAt: -1 }).skip(skips).limit(limit).toArray();
+      return await db.contents.find(query).sort({ createdAt: -1 }).skip(skips).limit(limit).toArray();
     } catch (error) {
       throw error;
     }

@@ -1,23 +1,9 @@
-import {
-  NextFunction,
-  Request,
-  Response,
-} from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-import {
-  fileUpload,
-  isValidFile,
-} from '../middlewares';
-import {
-  DepartmentRepository,
-  UserRepository,
-} from '../repository';
+import { fileUpload, isValidFile } from '../middlewares';
+import { DepartmentRepository, UserRepository } from '../repository';
 import { validateJson } from '../schemas';
-import {
-  Common,
-  CustomError,
-  UserRole,
-} from '../utils';
+import { Common, CustomError, UserRole } from '../utils';
 
 class DepartmentService {
   static async uploadDepartmentLogoHandler(req: Request, res: Response, next: NextFunction) {
@@ -44,6 +30,25 @@ class DepartmentService {
   static async departmentHandler(req: Request) {
     try {
       const departmentDocs = await DepartmentRepository.readDepartments();
+      return { departmentDocs };
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async readDepartment(req: Request) {
+    const { query, params } = req;
+    try {
+      const payload = {
+        deaprtmentId: params.departmentId,
+      };
+      const schemaResult = validateJson('readDepartmentReq', payload);
+      if (!schemaResult.result) {
+        throw new CustomError(400, Common.translate('schemaerror', query?.lang as string), schemaResult.errors);
+      }
+      const newPayload = {
+        _id: Common.getId(payload.deaprtmentId),
+      };
+      const departmentDocs = await DepartmentRepository.readDepartment(newPayload);
       return { departmentDocs };
     } catch (error) {
       throw error;

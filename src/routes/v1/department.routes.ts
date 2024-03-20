@@ -5,7 +5,8 @@ import { DepartmentService } from '../../services';
 
 const router = express.Router();
 
-router.get('/', DepartmentController.getDepartmentHandler);
+router.get('/', DepartmentController.getDepartmentsHandler);
+router.get('/:departmentId', DepartmentController.getDepartmentHandler);
 router.patch(
   '/:departmentId',
   DepartmentService.uploadDepartmentLogoHandler,

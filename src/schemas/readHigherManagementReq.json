@@ -1,0 +1,13 @@
+{
+  "$id": "readHigherManagementReq",
+  "type": "object",
+  "properties": {
+    "higherManagementId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "higherManagementId must be a valid MongoDB ObjectId."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

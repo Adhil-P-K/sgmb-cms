@@ -1,0 +1,13 @@
+{
+  "$id": "getContentReq",
+  "type": "object",
+  "properties": {
+    "contentId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "contentId must be a valid MongoDB ObjectId."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

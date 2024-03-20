@@ -42,6 +42,7 @@ class EntityService {
       if (query.status) {
         filterQuery['status'] = Common.mongoSanitize(query.status);
       }
+
       const totalEventDocs = await EntityRepository.readEntitiesCount(filterQuery);
       const totalPages = Math.ceil(totalEventDocs / perPage);
       const entityDocs = await EntityRepository.readEntities(filterQuery, skips, perPage);

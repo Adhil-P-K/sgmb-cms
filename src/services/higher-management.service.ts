@@ -2,18 +2,34 @@ import { Request } from 'express';
 
 import { UserRepository } from '../repository';
 import { validateJson } from '../schemas';
-import {
-  Common,
-  CustomError,
-  UserLevel,
-} from '../utils';
+import { Common, CustomError, UserLevel } from '../utils';
 
 class HighermnagementService {
-  static async getHighermanagementHandler(req: Request) {
+  static async getHighermanagementsHandler(req: Request) {
     try {
       const highermanagementDocs = await UserRepository.readUsers({
         level: UserLevel.HIGHER_MANAGEMENT,
       });
+      return { highermanagementDocs };
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getHighermanagementHandler(req: Request) {
+    const { query, params } = req;
+    try {
+      const payload = {
+        higherManagementId: params.highermanagementId,
+      };
+
+      const schemaResult = validateJson('readHigherManagementReq', payload);
+      if (!schemaResult.result) {
+        throw new CustomError(400, Common.translate('schemaerror', query?.lang as string), schemaResult.errors);
+      }
+      const newPayload = {
+        _id: Common.getId(payload.higherManagementId),
+      };
+      const highermanagementDocs = await UserRepository.readUser(newPayload);
       return { highermanagementDocs };
     } catch (error) {
       throw error;

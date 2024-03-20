@@ -25,7 +25,7 @@ async function initDb(connectionUrl: string, callback: any) {
     db.eventCategories = db.collection('event-categories');
     db.syslogs = db.collection('syslogs');
     db.contents = db.collection('contents');
-
+    await db.contents.createIndex({ key: 1 }, { unique: true });
     dbInstance = db;
 
     return callback(null, db);

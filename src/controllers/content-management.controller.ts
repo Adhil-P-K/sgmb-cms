@@ -7,17 +7,17 @@ import {
 import { ContentManagementService } from '../services';
 
 class ContentManagementController {
-  static async getContentsHandler(req: Request, res: Response, next: NextFunction) {
+  static async CreateContentsHandler(req: Request, res: Response, next: NextFunction) {
     try {
-      const response = await ContentManagementService.getEntities(req);
+      const response = await ContentManagementService.createContent(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);
     }
   }
-  static async CreateContentsHandler(req: Request, res: Response, next: NextFunction) {
+  static async getContentsHandler(req: Request, res: Response, next: NextFunction) {
     try {
-      const response = await ContentManagementService.getEntities(req);
+      const response = await ContentManagementService.getContents(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);
@@ -25,7 +25,7 @@ class ContentManagementController {
   }
   static async getContentHandler(req: Request, res: Response, next: NextFunction) {
     try {
-      const response = await ContentManagementService.getEntity(req);
+      const response = await ContentManagementService.getContent(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);
@@ -33,7 +33,7 @@ class ContentManagementController {
   }
   static async updateContentHandler(req: Request, res: Response, next: NextFunction) {
     try {
-      const response = await ContentManagementService.updateEnity(req);
+      const response = await ContentManagementService.updateContent(req);
       return res.status(200).json(response);
     } catch (error) {
       next(error);

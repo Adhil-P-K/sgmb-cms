@@ -17,6 +17,7 @@ class DepartmentRepository {
       throw error;
     }
   }
+
   static async updateDepartment(query: object, payload: object, options?: object) {
     const db = getDb();
     try {

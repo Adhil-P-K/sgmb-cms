@@ -1,0 +1,32 @@
+{
+  "$id": "ContnetCreateReq",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Conetnt key is required and cannot be empty."
+    },
+    "content_en": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Conetnt english name is required and cannot be empty."
+    },
+    "content_ar": {
+      "type": "string",
+      "isNotEmpty": true,
+      "errorMessage": "Conetnt arabic name is required and cannot be empty."
+    },
+    "variables": {
+      "type": "string",
+      "format": "variable",
+      "errorMessage": "Invalid variables format. Data must contain exactly one pair of double brackets {{ }}."
+    }
+  },
+  "required": [
+    "key",
+    "content_en",
+    "content_ar"
+  ],
+  "errorMessage": "Request malformed."
+}

@@ -137,6 +137,7 @@
     "sntitle5": "Calendar Request – Asked to Modify",
     "sntext5": "Your calendar request \"{{calandarRequest.name}}\" is asked  to modify by Admin.",
     "sntitle6": "Calendar Request Edited by Admin",
-    "sntext6": "Your calendar request \"{{calandarRequest.name}}\" is edited by Admin."
+    "sntext6": "Your calendar request \"{{calandarRequest.name}}\" is edited by Admin.",
+    "contentVariableNotfornd": "contentVariableNotfornd"
   }
 }

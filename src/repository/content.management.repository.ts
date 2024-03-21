@@ -33,10 +33,18 @@ class ContentRepository {
       throw error;
     }
   }
-  static async updateContent(query: any, payload: any, options: any) {
+  static async updateContent(query: object, payload: any, options: any) {
     const db = getDb();
     try {
       return await db.contents.findOneAndUpdate(query, payload, options);
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async readContentJson() {
+    const db = getDb();
+    try {
+      return await db.contents.find().toArray();
     } catch (error) {
       throw error;
     }

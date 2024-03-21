@@ -1,4 +1,6 @@
 import { Request } from 'express';
+import fs from 'fs';
+import path from 'path';
 
 import { ContentPayload } from '../models';
 import { ContentRepository } from '../repository/content.management.repository';
@@ -6,6 +8,23 @@ import { validateJson } from '../schemas';
 import { Common, CustomError } from '../utils';
 
 class ContentManagementService {
+  static async UpdatedLanguageJson() {
+    try {
+      const data = await ContentRepository.readContentJson();
+      const englishData: { [key: string]: string } = {};
+      const arabicData: { [key: string]: string } = {};
+      data.forEach((entry: any, index: number) => {
+        englishData[entry.key] = entry.content_en;
+        arabicData[entry.key] = entry.content_ar;
+      });
+      const englishJsonData = JSON.stringify({ translation: englishData }, null, 2);
+      const arabicJsonData = JSON.stringify({ translation: arabicData }, null, 2);
+      fs.writeFileSync(path.join(__dirname, '../../sgmb/files', 'en.json'), englishJsonData);
+      fs.writeFileSync(path.join(__dirname, '../../sgmb/files', 'ar.json'), arabicJsonData);
+    } catch (error) {
+      throw error;
+    }
+  }
   static async createContent(req: Request) {
     const { query, body } = req;
     try {
@@ -36,8 +55,11 @@ class ContentManagementService {
       }
 
       const conetntDoc = await ContentRepository.createContent(newPayload);
-      console.log('validation true', payload);
-      return conetntDoc;
+      this.UpdatedLanguageJson();
+      return {
+        message: 'successfully created content',
+        data: conetntDoc,
+      };
     } catch (error) {
       throw error;
     }
@@ -61,6 +83,7 @@ class ContentManagementService {
       const ContentDocs = await ContentRepository.readContents(filterQuery, skips, perPage);
 
       return {
+        message: 'succesfully retrived contents',
         currentPage,
         perPage,
         totalCount: totalContentDocs,
@@ -85,10 +108,7 @@ class ContentManagementService {
       }
       const ContentDoc = await ContentRepository.readContent(Common.getId(payload.contentId));
 
-      return {
-        message: Common.translate('entityretrivedsuccess', query?.lang as string),
-        data: { ContentDoc },
-      };
+      return { ContentDoc };
     } catch (error) {
       throw error;
     }
@@ -98,7 +118,6 @@ class ContentManagementService {
     try {
       const payload = {
         contentId: params.contentId,
-        key: body.key,
         content_en: body.content_en,
         content_ar: body.content_ar,
         variables: body.variables,
@@ -108,7 +127,23 @@ class ContentManagementService {
       if (!schemaResult.result) {
         throw new CustomError(400, Common.translate('schemaerror', query?.lang as string), schemaResult.errors);
       }
-      return true;
+      const contentDoc = await ContentRepository.updateContent(
+        { _id: Common.getId(payload.contentId) },
+        {
+          $set: {
+            content_en: Common.sanitize(payload.content_en),
+            content_ar: Common.sanitize(payload.content_ar),
+            variables: Common.sanitize(payload.variables),
+            updatedAt: new Date(),
+          },
+        },
+        { returnDocument: 'after' },
+      );
+      this.UpdatedLanguageJson();
+      return {
+        message: 'Successfully updated content',
+        data: contentDoc,
+      };
     } catch (error) {
       throw error;
     }

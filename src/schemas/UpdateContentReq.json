@@ -7,11 +7,6 @@
       "format": "objectid",
       "errorMessage": "contentId must be a valid MongoDB ObjectId."
     },
-    "key": {
-      "type": "string",
-      "isNotEmpty": true,
-      "errorMessage": "Conetnt key is required and cannot be empty."
-    },
     "content_en": {
       "type": "string",
       "isNotEmpty": true,
@@ -30,9 +25,9 @@
   },
   "required": [
     "contentId",
-    "key",
     "content_en",
-    "content_ar"
+    "content_ar",
+    "variables"
   ],
   "errorMessage": "Request malformed."
 }

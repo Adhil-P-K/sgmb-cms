@@ -9,7 +9,6 @@ import { V1Routes } from './routes/v1';
 import { initAjv } from './schemas';
 
 const app = express();
-
 const httpServer = createServer(app);
 app.use(
   cors({

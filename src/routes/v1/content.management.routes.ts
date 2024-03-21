@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/contentmanagement', (req: Request, res: Response) => {
   res.send({ content: true });
 });
+router.get('/test', ContentManagementController.test);
 router.post('/', ContentManagementController.CreateContentsHandler);
 router.get('/', ContentManagementController.getContentsHandler);
 router.get('/:contentId', ContentManagementController.getContentHandler);

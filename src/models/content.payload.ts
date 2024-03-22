@@ -3,5 +3,5 @@ export interface ContentPayload {
   content_en: any;
   content_ar: any;
   createdAt: Date;
-  variables?: string;
+  variables?: any[];
 }

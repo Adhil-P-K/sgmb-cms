@@ -32,7 +32,7 @@ class ContentManagementService {
         key: Common.generateSlug(body.key),
         content_en: body.content_en,
         content_ar: body.content_ar,
-        variables: body.variables,
+        variables: Array.isArray(body.variables) ? body.variables : [body.variables],
       };
       const schemaResult = validateJson('ContnetCreateReq', payload);
       if (!schemaResult.result) {
@@ -51,7 +51,7 @@ class ContentManagementService {
         createdAt: new Date(),
       };
       if (payload.variables) {
-        newPayload.variables = payload.variables;
+        newPayload.variables?.push(payload.variables);
       }
 
       const conetntDoc = await ContentRepository.createContent(newPayload);

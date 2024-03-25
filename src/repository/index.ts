@@ -26,6 +26,7 @@ async function initDb(connectionUrl: string, callback: any) {
     db.syslogs = db.collection('syslogs');
     db.contents = db.collection('contents');
     await db.contents.createIndex({ key: 1 }, { unique: true });
+    db.smtp = db.collection('smtp');
     dbInstance = db;
 
     return callback(null, db);
@@ -42,3 +43,4 @@ export * from './user.repository';
 export * from './entity.repository';
 export * from './department.repository';
 export * from './higher.management.repository';
+export * from './smtp.repository';

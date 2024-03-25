@@ -5,3 +5,11 @@ export interface ContentPayload {
   createdAt: Date;
   variables?: any[];
 }
+export interface UpdateContentPayload {
+  $set: {
+    content_en: string;
+    content_ar: string;
+    updatedAt: Date;
+    variables?: string; // Optional field
+  };
+}

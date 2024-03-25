@@ -2,7 +2,7 @@ import { Request } from 'express';
 import fs from 'fs';
 import path from 'path';
 
-import { ContentPayload } from '../models';
+import { ContentPayload, UpdateContentPayload } from '../models';
 import { ContentRepository } from '../repository/content.management.repository';
 import { validateJson } from '../schemas';
 import { Common, CustomError } from '../utils';
@@ -51,7 +51,7 @@ class ContentManagementService {
         createdAt: new Date(),
       };
       if (payload.variables) {
-        newPayload.variables?.push(payload.variables);
+        newPayload.variables = Array.isArray(payload.variables) ? [...payload.variables] : [payload.variables];
       }
 
       const conetntDoc = await ContentRepository.createContent(newPayload);
@@ -127,18 +127,25 @@ class ContentManagementService {
       if (!schemaResult.result) {
         throw new CustomError(400, Common.translate('schemaerror', query?.lang as string), schemaResult.errors);
       }
+
+      const updatePayload: UpdateContentPayload = {
+        $set: {
+          content_en: Common.sanitize(payload.content_en),
+          content_ar: Common.sanitize(payload.content_ar),
+          updatedAt: new Date(),
+        },
+      };
+
+      if (payload.variables) {
+        updatePayload.$set.variables = payload.variables;
+      }
+
       const contentDoc = await ContentRepository.updateContent(
         { _id: Common.getId(payload.contentId) },
-        {
-          $set: {
-            content_en: Common.sanitize(payload.content_en),
-            content_ar: Common.sanitize(payload.content_ar),
-            variables: Common.sanitize(payload.variables),
-            updatedAt: new Date(),
-          },
-        },
+        updatePayload,
         { returnDocument: 'after' },
       );
+
       this.UpdatedLanguageJson();
       return {
         message: 'Successfully updated content',

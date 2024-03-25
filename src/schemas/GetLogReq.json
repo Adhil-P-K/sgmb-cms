@@ -1,0 +1,13 @@
+{
+  "$id": "getLogReq",
+  "type": "object",
+  "properties": {
+    "logId": {
+      "type": "string",
+      "format": "objectid",
+      "errorMessage": "LogId must be a valid MongoDB ObjectId."
+    }
+  },
+  "additionalProperties": false,
+  "errorMessage": "Invalid data. Please provide an object with allowed properties."
+}

@@ -18,16 +18,14 @@
       "errorMessage": "Conetnt arabic name is required and cannot be empty."
     },
     "variables": {
-      "type": "string",
-      "format": "variable",
-      "errorMessage": "Invalid variables format. Data must contain exactly one pair of double brackets {{ }}."
+      "type": "array",
+      "errorMessage": "Invalid variables format. variables must be Array."
     }
   },
   "required": [
     "contentId",
     "content_en",
-    "content_ar",
-    "variables"
+    "content_ar"
   ],
   "errorMessage": "Request malformed."
 }
